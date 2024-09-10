@@ -1,0 +1,37 @@
+hbase:034:0> list_procedures
+ PID Name State Submitted Last_Update Parameters
+ 33 org.apache.hadoop.hbase.master.procedure.EnableTableProcedure WAITING 2024-09-10 06:38:45 +0000 2024-09-10 06:38:45 +0000 [{"state"=>[1, 2, 3, 4, 5]}, {"userInfo"=>{"effectiveUser"=>"hbase"}, "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}, "skipTableStateCheck"=>false}]
+ 34 org.apache.hadoop.hbase.master.assignment.TransitRegionStateProcedure WAITING 2024-09-10 06:38:45 +0000 2024-09-10 06:38:45 +0000 [{"state"=>[1, 2, 3]}, {"regionId"=>"1725861248166", "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}, "startKey"=>"", "endKey"=>"", "offline"=>false, "split"=>false, "replicaId"=>0}, {"type"=>"ASSIGN", "forceNewPlan"=>false}]
+ 35 org.apache.hadoop.hbase.master.assignment.OpenRegionProcedure RUNNABLE 2024-09-10 06:38:45 +0000 2024-09-10 06:38:45 +0000 [{"region"=>{"regionId"=>"1725861248166", "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}, "startKey"=>"", "endKey"=>"", "offline"=>false, "split"=>false, "replicaId"=>0}, "targetServer"=>{"hostName"=>"d4280b68affe.bigtop.apache.org", "port"=>16020, "startCode"=>"1725848412833"}, "state"=>"REGION_REMOTE_PROCEDURE_DISPATCH"}, {}]
+ 36 org.apache.hadoop.hbase.master.procedure.EnableTableProcedure RUNNABLE 2024-09-10 06:49:52 +0000 2024-09-10 06:49:52 +0000 [{}, {"userInfo"=>{"effectiveUser"=>"hbase"}, "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}, "skipTableStateCheck"=>false}]
+ 37 org.apache.hadoop.hbase.master.procedure.EnableTableProcedure RUNNABLE 2024-09-10 07:02:53 +0000 2024-09-10 07:02:53 +0000 [{}, {"userInfo"=>{"effectiveUser"=>"hbase"}, "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}, "skipTableStateCheck"=>false}]
+ 38 org.apache.hadoop.hbase.master.procedure.DeleteTableProcedure RUNNABLE 2024-09-10 07:15:55 +0000 2024-09-10 07:15:55 +0000 [{}, {"userInfo"=>{"effectiveUser"=>"hbase"}, "tableName"=>{"namespace"=>"ZGVmYXVsdA==", "qualifier"=>"dDE="}}]
+6 row(s)
+
+ t2                                              column=table:state, timestamp=2024-09-10T07:52:40.830, value=\x08\x01
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:regioninfo, timestamp=2024-09-10T07:51:02.658, value={ENCODED => d79f05192596d9bf3664cec76e0942ab, NAME => 't2,,1725954662156.d
+ 2ab.                                            79f05192596d9bf3664cec76e0942ab.', STARTKEY => '', ENDKEY => ''}
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:seqnumDuringOpen, timestamp=2024-09-10T07:51:02.658, value=\x00\x00\x00\x00\x00\x00\x00\x02
+ 2ab.
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:server, timestamp=2024-09-10T07:51:02.658, value=d36c6501323f.bigtop.apache.org:16020
+ 2ab.
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:serverstartcode, timestamp=2024-09-10T07:51:02.658, value=1725953805295
+ 2ab.
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:sn, timestamp=2024-09-10T07:51:02.425, value=d36c6501323f.bigtop.apache.org,16020,1725953805295
+ 2ab.
+ t2,,1725954662156.d79f05192596d9bf3664cec76e094 column=info:state, timestamp=2024-09-10T07:51:02.658, value=OPEN
+ 2ab.
+4 row(s)
+Took 0.0146 seconds
+hbase:037:0> drop 't2'
+
+ERROR: Table org.apache.hadoop.hbase.TableNotDisabledException: Not DISABLED; tableName=t2, state=DISABLING
+        at org.apache.hadoop.hbase.master.HMaster.checkTableModifiable(HMaster.java:2532)
+        at org.apache.hadoop.hbase.master.procedure.DeleteTableProcedure.prepareDelete(DeleteTableProcedure.java:244)
+        at org.apache.hadoop.hbase.master.procedure.DeleteTableProcedure.executeFromState(DeleteTableProcedure.java:93)
+        at org.apache.hadoop.hbase.master.procedure.DeleteTableProcedure.executeFromState(DeleteTableProcedure.java:61)
+        at org.apache.hadoop.hbase.procedure2.StateMachineProcedure.execute(StateMachineProcedure.java:188)
+        at org.apache.hadoop.hbase.procedure2.Procedure.doExecute(Procedure.java:922)
+        at org.apache.hadoop.hbase.procedure2.ProcedureExecutor.execProcedure(ProcedureExecutor.java:1646)
+        at org.apache.hadoop.hbase.procedure2.ProcedureExecutor.executeProcedure(ProcedureExecutor.java:1392)
+        at org.apache.hadoop.hbase.procedure2.ProcedureExecutor.access$1100(ProcedureExecutor.java:73)
